@@ -9,7 +9,7 @@ $result2 = $sth->fetchAll();
 $smarty->assign('result',$result2);
 
 if(isset($_POST["save"])) {
-	if (isset($_FILES['image']['tmp_name'])) {
+	if (!empty($_FILES['image']['tmp_name'])) {
 		$sql = "UPDATE products SET category_id=:cat_id, name=:name, image=:image, price=:price WHERE product_id=:id";
 		$statement = $dbh->prepare($sql);
 		$image = file_get_contents($_FILES['image']['tmp_name']);
