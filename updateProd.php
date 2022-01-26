@@ -1,7 +1,9 @@
 <?php 
 require('./smartyHeader.php');
 include 'db.php';
-$sth = $dbh->prepare("SELECT category_id, cat_name FROM categories");
+//$sth = $dbh->prepare("SELECT category_id, cat_name FROM categories WHERE product_id=:id");
+$sth = $dbh->prepare("SELECT products.category_id, categories.cat_name FROM products INNER JOIN categories ON products.category_id=categories.category_id WHERE product_id=:id");
+$sth->bindValue("id", $_GET['id']);
 $sth->execute();
 $result2 = $sth->fetchAll();
 $smarty->assign('result',$result2);
@@ -24,6 +26,8 @@ if(isset($_POST["save"])) {
 
  	header("Location:index.php");
 }
+
+
 $sql2 = "SELECT * from products where product_id = :id";
 $statement = $dbh->prepare($sql2);
 $statement->bindValue("id", $_GET['id']);
