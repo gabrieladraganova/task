@@ -20,6 +20,7 @@ if(isset($_POST["save"])){
 	$statement->bindValue("id", $_GET['id']);
 	$statement->execute();
 	$category = $statement->fetch();
+	
 	$smarty->assign('category', $category);
 	$smarty->display('updateCat.tpl');
 ?>

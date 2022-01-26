@@ -8,6 +8,4 @@ include 'db.php';
  	$statement->bindValue("id", $_POST['id']);
  	
  	$statement->execute();
-
-
 ?>

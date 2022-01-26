@@ -2,9 +2,9 @@
 require('./smartyHeader.php');
 include 'db.php';
 $sth = $dbh->prepare("SELECT category_id, cat_name FROM categories");
-		$sth->execute();
-		$result2 = $sth->fetchAll();
-		$smarty->assign('result',$result2);
+$sth->execute();
+$result2 = $sth->fetchAll();
+$smarty->assign('result',$result2);
 
 if(isset($_POST["save"])) {
 	if (isset($_FILES['image']['tmp_name'])) {
@@ -24,11 +24,12 @@ if(isset($_POST["save"])) {
 
  	header("Location:index.php");
 }
-	$sql2 = "SELECT * from products where product_id = :id";
-	$statement = $dbh->prepare($sql2);
-	$statement->bindValue("id", $_GET['id']);
-	$statement->execute();
-	$product = $statement->fetch();
-	$smarty->assign('product', $product);
-	$smarty->display('updateProd.tpl');
+$sql2 = "SELECT * from products where product_id = :id";
+$statement = $dbh->prepare($sql2);
+$statement->bindValue("id", $_GET['id']);
+$statement->execute();
+$product = $statement->fetch();
+
+$smarty->assign('product', $product);
+$smarty->display('updateProd.tpl');
 ?>
